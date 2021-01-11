@@ -61,15 +61,13 @@ except NameError:
     raw_input = input   # in python3 it's "raw"
     unichr = chr  
 
-time.sleep(1)
-
 try:
 
     user_selected_port_name = ask_for_port()
 
     print("You selected " + user_selected_port_name)
 
-    ser = serial.Serial(user_selected_port_name,9600)
+    ser = serial.Serial(user_selected_port_name)
 
     print("Press CTL+C to exit program")
 
