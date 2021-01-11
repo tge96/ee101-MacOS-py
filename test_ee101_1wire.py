@@ -1,3 +1,16 @@
+# $ python3 -m pip install pyserial
+# /dev/cu.usbserial-<XYZ> for mac,
+#       ...you can find your XYZ using $ python3 -m serial.tools.list_ports -v
+#       ...it might also be something like /dev/cu.usbmodem<XYZ>, depending on the USB Serial adapter
+# My XYZ is "FTVHYZXQ", which matches my USB Serial adapter, model no. TTL232RG-VIP
+#       ...another option for finding XYZ is to use $ ls /dev/cu.usb*
+# Another useful pyserial utility is:  $ python3 -m serial.tools.miniterm
+
+# Here's a simple brute force example:
+# ser = serial.Serial("/dev/cu.usbserial-FTVHYZXQ",9600)
+
+# To run:  $ python3 test_ee101_1wire.py
+
 import sys
 import time
 import serial
@@ -41,18 +54,6 @@ def ask_for_port():
             port = ports[index]
         return port    
 
-# $ python3 -m pip install pyserial
-# /dev/cu.usbserial-<XYZ> for mac,
-#       ...you can find your XYZ using $ python3 -m serial.tools.list_ports -v
-# My XYZ is "FTVHYZXQ", which matches my USB Serial adapter, model no. TTL232RG-VIP
-#       ...another option for finding XYZ is to use $ ls /dev/cu.usb*
-# Another useful pyserial utility is:  $ python3 -m serial.tools.miniterm
-
-# Here's a simple brute force example:
-# ser = serial.Serial("/dev/cu.usbserial-FTVHYZXQ",9600)
-
-# To run:  $ python3 test_ee101_1wire.py
-
 try:
     raw_input
 except NameError:
@@ -61,14 +62,13 @@ except NameError:
     unichr = chr  
 
 time.sleep(1)
+
 try:
-    # ser.write(("Hello World\r\n".encode()))
 
     user_selected_port_name = ask_for_port()
 
     print("You selected " + user_selected_port_name)
 
-    # open serial port
     ser = serial.Serial(user_selected_port_name,9600)
 
     print("Press CTL+C to exit program")
@@ -95,11 +95,6 @@ try:
         EE101Value(5, i)
         EE101Value(6, i)
         EE101Value(7, i)
-
-        # When tx>rx loopback is applied, one way to echo tx on rx is:
-        #if ser.inWaiting() > 0:
-        #    data = ser.read()
-        #    print(data)
 
 except KeyboardInterrupt:
     print("Exiting Program")
