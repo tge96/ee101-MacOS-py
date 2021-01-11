@@ -83,7 +83,7 @@ try:
         EE101Text(4,"your")
         EE101Text(5,"ee101")
         EE101Text(6,"ported to")
-        EE101Text(7,"Python on MacOS")
+        EE101Text(7,"Python on macOS")
 
         i += 1
 
