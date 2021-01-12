@@ -12,7 +12,6 @@
 # To run:  $ python3 test_ee101_1wire.py
 
 import sys
-import time
 import serial
 from serial.tools.list_ports import comports
 
